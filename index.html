@@ -1,1 +1,981 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Digi-Tech Temp Mail</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .badge {
+      background: #2563eb;
+      padding: 7px 13px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 55px 20px 30px;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: #667085;
+      font-size: 17px;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.07);
+    }
+
+    .label {
+      font-size: 13px;
+      color: #667085;
+      margin-bottom: 8px;
+    }
+
+    .email-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    #emailAddress {
+      flex: 1;
+      background: #f2f4f7;
+      border: 1px solid #e4e7ec;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 16px;
+      word-break: break-all;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      padding: 13px 17px;
+      font-weight: 600;
+      transition: .2s;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .primary {
+      background: #2563eb;
+      color: white;
+    }
+
+    .dark {
+      background: #111827;
+      color: white;
+    }
+
+    .danger {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .actions button {
+      flex: 1;
+    }
+
+    .timer {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 12px;
+      background: #eff6ff;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    #timer {
+      font-size: 22px;
+      margin-left: 5px;
+    }
+
+    .inbox-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .inbox-header h2 {
+      font-size: 21px;
+    }
+
+    #messageCount {
+      color: #667085;
+      font-size: 13px;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 45px 10px;
+      color: #98a2b3;
+    }
+
+    .empty-icon {
+      font-size: 45px;
+      margin-bottom: 12px;
+    }
+
+    .message {
+      border: 1px solid #eaecf0;
+      border-radius: 12px;
+      padding: 17px;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    .message:hover {
+      background: #f9fafb;
+    }
+
+    .message-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .sender {
+      font-weight: 700;
+    }
+
+    .time {
+      color: #98a2b3;
+      font-size: 12px;
+    }
+
+    .subject {
+      margin-top: 6px;
+      color: #475467;
+    }
+
+    .message-body {
+      display: none;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #eaecf0;
+      color: #475467;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      color: #98a2b3;
+      padding: 35px 15px;
+      font-size: 13px;
+    }
+
+    #status {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 13px;
+      color: #667085;
+    }
+
+    @media(max-width:600px) {
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .email-row {
+        flex-direction: column;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .actions button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">✉ Digi-Tech Temp Mail</div>
+  <div class="badge">PERSONAL</div>
+</header>
+
+<section class="hero">
+  <h1>Free Temporary Email</h1>
+  <p>Create a temporary email address instantly.</p>
+</section>
+
+<main class="container">
+
+  <div class="card">
+
+    <div class="label">
+      Your temporary email address
+    </div>
+
+    <div class="email-row">
+
+      <div id="emailAddress">
+        Click "Create Email"
+      </div>
+
+      <button class="dark" onclick="copyEmail()">
+        📋 Copy
+      </button>
+
+    </div>
+
+    <div class="actions">
+
+      <button class="primary" onclick="createEmail()">
+        ✨ Create Email
+      </button>
+
+      <button class="primary" onclick="refreshInbox()">
+        🔄 Refresh
+      </button>
+
+      <button class="danger" onclick="deleteEmail()">
+        🗑 Delete
+      </button>
+
+    </div>
+
+    <div class="timer">
+      ⏱️ Expires in:
+      <span id="timer">--:--</span>
+    </div>
+
+    <div id="status"></div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="inbox-header">
+
+      <h2>📥 Inbox</h2>
+
+      <span id="messageCount">
+        0 messages
+      </span>
+
+    </div>
+
+    <div id="inboxContent">
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          📭
+        </div>
+
+        <p>No messages yet</p>
+
+        <small>
+          Create a temporary email address first.
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+
+<footer>
+  © 2026 Digi-Tech Temp Mail
+</footer>
+
+
+<!-- Firebase -->
+
+<script type="module">
+
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    deleteDoc,
+    doc,
+    query,
+    where,
+    orderBy,
+    onSnapshot,
+    serverTimestamp
+  }
+  from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+
+  /* Firebase Configuration */
+
+  const firebaseConfig = {
+
+    apiKey: "AIzaSyA_QK4tZdTeVhTC0SyGf7c6STsKUUMm0o",
+
+    authDomain:
+      "my-temp-mail-a13a0.firebaseapp.com",
+
+    projectId:
+      "my-temp-mail-a13a0",
+
+    storageBucket:
+      "my-temp-mail-a13a0.firebasestorage.app",
+
+    messagingSenderId:
+      "538169580006",
+
+    appId:
+      "1:538169580006:web:25bcfc5fffabb8432be1e27",
+
+    measurementId:
+      "G-C0XGGEPYLD"
+  };
+
+
+  /* Start Firebase */
+
+  const app =
+    initializeApp(firebaseConfig);
+
+  const db =
+    getFirestore(app);
+
+
+  let currentEmail = "";
+
+  let currentMailboxId = "";
+
+  let expiryTime = null;
+
+  let timerInterval = null;
+
+  let unsubscribeInbox = null;
+
+
+  /* Random email username */
+
+  function randomName() {
+
+    const chars =
+      "abcdefghijklmnopqrstuvwxyz0123456789";
+
+    let result = "";
+
+    for (let i = 0; i < 8; i++) {
+
+      result +=
+        chars.charAt(
+          Math.floor(
+            Math.random() * chars.length
+          )
+        );
+
+    }
+
+    return result;
+  }
+
+
+  /* Create email */
+
+  window.createEmail = async function() {
+
+    try {
+
+      currentEmail =
+        randomName() + "@temp-demo.local";
+
+      const createdAt =
+        new Date();
+
+      expiryTime =
+        Date.now() + 10 * 60 * 1000;
+
+
+      const mailbox =
+        await addDoc(
+          collection(db, "mailboxes"),
+          {
+
+            email: currentEmail,
+
+            createdAt:
+              serverTimestamp(),
+
+            expiresAt:
+              new Date(expiryTime)
+
+          }
+        );
+
+
+      currentMailboxId =
+        mailbox.id;
+
+
+      document.getElementById(
+        "emailAddress"
+      ).textContent =
+        currentEmail;
+
+
+      document.getElementById(
+        "status"
+      ).textContent =
+        "Temporary mailbox created successfully.";
+
+
+      document.getElementById(
+        "inboxContent"
+      ).innerHTML = `
+
+        <div class="empty">
+
+          <div class="empty-icon">
+            📭
+          </div>
+
+          <p>No messages yet</p>
+
+          <small>
+            Waiting for incoming email...
+          </small>
+
+        </div>
+
+      `;
+
+
+      document.getElementById(
+        "messageCount"
+      ).textContent =
+        "0 messages";
+
+
+      startTimer();
+
+      listenForMessages();
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      document.getElementById(
+        "status"
+      ).textContent =
+        "Firebase error: " + error.message;
+
+    }
+
+  };
+
+
+  /* Copy email */
+
+  window.copyEmail = async function() {
+
+    if (!currentEmail) {
+
+      alert(
+        "First create an email address."
+      );
+
+      return;
+    }
+
+    try {
+
+      await navigator.clipboard.writeText(
+        currentEmail
+      );
+
+      alert("Email copied!");
+
+    } catch {
+
+      alert("Copy failed.");
+
+    }
+
+  };
+
+
+  /* Countdown */
+
+  function startTimer() {
+
+    clearInterval(timerInterval);
+
+    timerInterval =
+      setInterval(() => {
+
+        const remaining =
+          expiryTime - Date.now();
+
+
+        if (remaining <= 0) {
+
+          clearInterval(timerInterval);
+
+          document.getElementById(
+            "timer"
+          ).textContent =
+            "Expired";
+
+          return;
+        }
+
+
+        const minutes =
+          Math.floor(
+            remaining / 60000
+          );
+
+        const seconds =
+          Math.floor(
+            (remaining % 60000) / 1000
+          );
+
+
+        document.getElementById(
+          "timer"
+        ).textContent =
+
+          String(minutes)
+            .padStart(2, "0")
+
+          + ":" +
+
+          String(seconds)
+            .padStart(2, "0");
+
+
+      }, 1000);
+
+  }
+
+
+  /* Listen for messages */
+
+  function listenForMessages() {
+
+    if (!currentMailboxId) return;
+
+
+    if (unsubscribeInbox) {
+
+      unsubscribeInbox();
+
+    }
+
+
+    const messagesRef =
+      collection(db, "messages");
+
+
+    const q =
+      query(
+
+        messagesRef,
+
+        where(
+          "mailboxId",
+          "==",
+          currentMailboxId
+        ),
+
+        orderBy(
+          "receivedAt",
+          "desc"
+        )
+
+      );
+
+
+    unsubscribeInbox =
+      onSnapshot(q, snapshot => {
+
+        const inbox =
+          document.getElementById(
+            "inboxContent"
+          );
+
+
+        if (snapshot.empty) {
+
+          inbox.innerHTML = `
+
+            <div class="empty">
+
+              <div class="empty-icon">
+                📭
+              </div>
+
+              <p>No messages yet</p>
+
+              <small>
+                Waiting for incoming email...
+              </small>
+
+            </div>
+
+          `;
+
+
+          document.getElementById(
+            "messageCount"
+          ).textContent =
+            "0 messages";
+
+
+          return;
+
+        }
+
+
+        inbox.innerHTML = "";
+
+
+        snapshot.forEach(
+          messageDoc => {
+
+            const data =
+              messageDoc.data();
+
+
+            const message =
+              document.createElement(
+                "div"
+              );
+
+
+            message.className =
+              "message";
+
+
+            message.innerHTML = `
+
+              <div class="message-top">
+
+                <div class="sender">
+                  ${escapeHtml(
+                    data.sender || "Unknown"
+                  )}
+                </div>
+
+                <div class="time">
+                  ${formatTime(
+                    data.receivedAt
+                  )}
+                </div>
+
+              </div>
+
+              <div class="subject">
+                ${escapeHtml(
+                  data.subject ||
+                  "No subject"
+                )}
+              </div>
+
+              <div class="message-body">
+
+                ${escapeHtml(
+                  data.body ||
+                  "No message content."
+                )}
+
+              </div>
+
+            `;
+
+
+            message.onclick =
+              () => {
+
+                const body =
+                  message.querySelector(
+                    ".message-body"
+                  );
+
+                body.style.display =
+                  body.style.display ===
+                  "block"
+                    ? "none"
+                    : "block";
+
+              };
+
+
+            inbox.appendChild(
+              message
+            );
+
+          }
+        );
+
+
+        document.getElementById(
+          "messageCount"
+        ).textContent =
+
+          snapshot.size +
+
+          (
+            snapshot.size === 1
+              ? " message"
+              : " messages"
+          );
+
+      });
+
+  }
+
+
+  /* Refresh */
+
+  window.refreshInbox = function() {
+
+    if (!currentEmail) {
+
+      alert(
+        "First create an email address."
+      );
+
+      return;
+    }
+
+    listenForMessages();
+
+    document.getElementById(
+      "status"
+    ).textContent =
+      "Inbox refreshed.";
+
+  };
+
+
+  /* Delete mailbox */
+
+  window.deleteEmail = async function() {
+
+    if (!currentMailboxId) {
+
+      return;
+
+    }
+
+
+    if (
+      !confirm(
+        "Delete this temporary email?"
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    try {
+
+      await deleteDoc(
+        doc(
+          db,
+          "mailboxes",
+          currentMailboxId
+        )
+      );
+
+
+      if (unsubscribeInbox) {
+
+        unsubscribeInbox();
+
+      }
+
+
+      clearInterval(
+        timerInterval
+      );
+
+
+      currentEmail = "";
+
+      currentMailboxId = "";
+
+      expiryTime = null;
+
+
+      document.getElementById(
+        "emailAddress"
+      ).textContent =
+        "Click Create Email";
+
+
+      document.getElementById(
+        "timer"
+      ).textContent =
+        "--:--";
+
+
+      document.getElementById(
+        "messageCount"
+      ).textContent =
+        "0 messages";
+
+
+      document.getElementById(
+        "status"
+      ).textContent =
+        "Mailbox deleted.";
+
+
+      document.getElementById(
+        "inboxContent"
+      ).innerHTML = `
+
+        <div class="empty">
+
+          <div class="empty-icon">
+            📭
+          </div>
+
+          <p>No messages yet</p>
+
+          <small>
+            Create a new temporary email.
+          </small>
+
+        </div>
+
+      `;
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "Delete error: " +
+        error.message
+      );
+
+    }
+
+  };
+
+
+  /* Escape HTML */
+
+  function escapeHtml(value) {
+
+    return String(value)
+
+      .replaceAll("&", "&amp;")
+
+      .replaceAll("<", "&lt;")
+
+      .replaceAll(">", "&gt;")
+
+      .replaceAll('"', "&quot;")
+
+      .replaceAll("'", "&#039;");
+
+  }
+
+
+  /* Format time */
+
+  function formatTime(timestamp) {
+
+    if (!timestamp) {
+
+      return "Just now";
+
+    }
+
+
+    try {
+
+      const date =
+        timestamp.toDate();
+
+
+      return date.toLocaleString();
+
+    } catch {
+
+      return "Just now";
+
+    }
+
+  }
+
+</script>
+
+</body>
+</html>
